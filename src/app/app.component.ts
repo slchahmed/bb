@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './login/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private authservice:AuthService,private router:Router) {}
+
+  async logout(){
+   await this.authservice.logout()
+  this.router.navigateByUrl('/',{replaceUrl:true});
+  }
 }

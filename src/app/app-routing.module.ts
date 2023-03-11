@@ -1,15 +1,33 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {canActivate ,redirectUnauthorizedTo,redirectLoggedInTo} from '@angular/fire/auth-guard'
 
+const redirectTodash = ()=> redirectLoggedInTo(['dash'])
+const redirectToLogin =()=> redirectUnauthorizedTo([''])
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    ...canActivate(redirectTodash)
+  },
+  
+  {
+    path: 'dash',
+    loadChildren: () => import('./login/dash/dash.module').then( m => m.DashPageModule)
+  },
+  {
+    path: 'status',
+    loadChildren: () => import('./login/status/status.module').then( m => m.StatusPageModule)
+  },
+  {
+    path: 'calandrie',
+    loadChildren: () => import('./calandrie/calandrie.module').then( m => m.CalandriePageModule),
+    ...canActivate(redirectToLogin)
   },
 ];
 

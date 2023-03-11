@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "projet-fin-9feea"
+  },
+  "targets": {
+    "projet-fin-9feea": {
+      "hosting": {
+        "app": [
+          "projet-fin-9feea"
+        ]
+      }
+    }
+  }
+}
