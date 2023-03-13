@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: StatusPage
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('../dash/info/info.module').then( m => m.InfoPageModule)
   }
 ];
 

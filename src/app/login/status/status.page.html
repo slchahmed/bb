@@ -29,7 +29,7 @@
                   <ion-row class="titles">
                     <ion-col>Titre</ion-col>
                    
-                    <ion-col>status</ion-col>
+                    <ion-col class="ion-text-center">status</ion-col>
                   </ion-row>
                 
                 <ion-row class="rows_data" *ngFor="let projet of search_result">
@@ -41,7 +41,8 @@
                     <ion-item class="list_item" lines="none">
                         <ion-col>{{projet.Titre}}</ion-col>
                         
-                        <ion-col><ion-badge [style.background-color]="projet.badgeColor">.</ion-badge>
+                        <ion-col class="ion-text-center">
+                          <ion-badge [style.background]="projet.badgeColor" [style.color]="projet.badgeColor">.</ion-badge>
                         </ion-col>
                     
                     </ion-item>

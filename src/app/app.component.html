@@ -25,9 +25,20 @@
     </ion-header>
     <ion-content>
       <ion-list style="background-color: #F6F7FB">    
-        <ion-item [routerLink]="['dash']" ><ion-icon slot="end" name="clipboard" ></ion-icon>Accuel</ion-item>
-        <ion-item [routerLink]="['status']" ><ion-icon slot="end" name="clipboard" ></ion-icon>Accuel</ion-item>
-        <ion-item (click)="logout()" ><ion-icon slot="end" name="log-out"></ion-icon>  Se Deconnecter</ion-item>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['dash']" ><ion-icon slot="end" name="clipboard" ></ion-icon>Tableau de bord</ion-item>
+
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['status']" ><ion-icon slot="end" name="eye-outline"></ion-icon>status</ion-item>
+
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item (click)="logout()" ><ion-icon slot="end" name="log-out"></ion-icon>  Se Deconnecter</ion-item>
+
+        </ion-menu-toggle>
+
       </ion-list>
     </ion-content>
   </ion-menu>

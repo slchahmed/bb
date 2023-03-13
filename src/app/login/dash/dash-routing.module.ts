@@ -9,7 +9,7 @@ const routes: Routes = [
     component: DashPage
   },
   {
-    path: 'info',
+    path: ':id',
     loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
   }
 ];

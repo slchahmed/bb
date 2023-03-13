@@ -32,10 +32,9 @@ ion-card {
 // scrolling list 
 .overflow {
     width: 100%;
-    height:360px;
+    height:auto;
     padding: 10px;
-    overflow-x: auto;
-    overflow-y: auto ;
+ 
     border-radius: 14px;
     background-color: white;
 }

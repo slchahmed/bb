@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import { AlertController } from '@ionic/angular';
-import { AuthService } from '../auth.service';
 import { projet, ProjetService } from '../projet.service'
 @Component({
   selector: 'app-dash',
@@ -23,7 +23,7 @@ export class DashPage implements OnInit {
  constructor(private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
   }
 
- ngOnInit() {
+  async ngOnInit() {
    
    this.serviceprojects.getprojets().subscribe(projets =>{
    
@@ -88,15 +88,31 @@ export class DashPage implements OnInit {
         projet.date_fin = projet.date_fin.split('T')[0]; 
       
      }
-     console.log(this.date_impo)
      this.projets=projets;
      this.search_result=this.projets.slice()
    })
+
+
+     await  LocalNotifications.requestPermissions();
+
+
  }
  ionViewDidleave(){
    this.T=0
   
-}
+ }
+
+ async sendNotification(){
+  await LocalNotifications.schedule({
+    notifications:[
+      {
+        title:"important",
+        body:'project have passed the date',
+        id:1
+      }
+    ]
+  })
+ }
 
 handleChange(value:string){
  const query = value.toLowerCase();

@@ -18,11 +18,13 @@ const routes: Routes = [
   
   {
     path: 'dash',
-    loadChildren: () => import('./login/dash/dash.module').then( m => m.DashPageModule)
+    loadChildren: () => import('./login/dash/dash.module').then( m => m.DashPageModule),
+    ...canActivate(redirectToLogin)
   },
   {
     path: 'status',
-    loadChildren: () => import('./login/status/status.module').then( m => m.StatusPageModule)
+    loadChildren: () => import('./login/status/status.module').then( m => m.StatusPageModule),
+    ...canActivate(redirectToLogin)
   },
   {
     path: 'calandrie',
