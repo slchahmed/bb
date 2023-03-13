@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CalandriePage
+  },
+  {
+    path: ':date',
+    loadChildren: () => import('./date-list/date-list.module').then( m => m.DateListPageModule)
   }
 ];
 

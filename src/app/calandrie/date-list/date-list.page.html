@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>list_date</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+                
+    <ion-row class="titles">
+      <ion-col>Titre</ion-col>
+      <ion-col>Date-debut</ion-col>
+      <ion-col>Date-fin</ion-col>
+      <ion-col>status</ion-col>
+    </ion-row>
+  
+  <ion-row class="rows_data" *ngFor="let projet of projets">
+    <ion-item-sliding class="slider">
+      <ion-item-options side="start">
+        <ion-item-option style="background: #2d38d3;" [routerLink]="[projet.id]"><ion-icon name="eye-outline"></ion-icon></ion-item-option>
+      </ion-item-options>
+  
+      <ion-item class="list_item" lines="none">
+          <ion-col>{{projet.Titre}}</ion-col>
+          <ion-col>{{projet.date_debut}}</ion-col>
+          <ion-col>{{projet.date_fin}}</ion-col>
+          <ion-col><ion-badge [style.background]="projet.badgeColor" [style.color]="projet.badgeColor">.</ion-badge>
+          </ion-col>
+      
+      </ion-item>
+  
+      <ion-item-options side="end">
+        <!-- <ion-item-option [routerLink]="['edit',projet.id]"><ion-icon name="brush-outline"></ion-icon></ion-item-option> -->
+        <!-- <ion-item-option color="danger"  (click)="ondelete(projet)"><ion-icon name="trash-outline"></ion-icon></ion-item-option> -->
+      </ion-item-options>
+    </ion-item-sliding>
+    
+  </ion-row>
+</ion-grid>
+</ion-content>

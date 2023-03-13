@@ -31,6 +31,8 @@ const routes: Routes = [
     loadChildren: () => import('./calandrie/calandrie.module').then( m => m.CalandriePageModule),
     ...canActivate(redirectToLogin)
   },
+ 
+
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ export class DashPage implements OnInit {
   F!:number   
   P!:number   
   date_impo:string[] =[];
+  passe_delai:number = 0
   
  constructor(private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
   }
@@ -76,6 +77,11 @@ export class DashPage implements OnInit {
            
 
         }
+
+        if (projet.status == 'behind schedule'){
+          this.passe_delai=this.passe_delai + 1
+         }
+
         const date_debut_temp = new Date(projet.date_debut);
         const date_fin_temp = new Date(projet.date_fin);
         
@@ -99,8 +105,10 @@ export class DashPage implements OnInit {
  }
  ionViewDidleave(){
    this.T=0
+   this.passe_delai=0
   
  }
+
 
  async sendNotification(){
   await LocalNotifications.schedule({

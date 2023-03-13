@@ -9,9 +9,14 @@ const routes: Routes = [
     component: DashPage
   },
   {
+    path: 'notifications',
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
     path: ':id',
     loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
-  }
+  },
+
 ];
 
 @NgModule({

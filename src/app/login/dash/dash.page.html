@@ -4,6 +4,10 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>dashboard</ion-title>
+    <ion-buttons style="font-size: 30px;" slot="end" [routerLink]="['notifications']">
+      <ion-badge color="danger">{{passe_delai}}</ion-badge>
+      <ion-icon  name="notifications"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

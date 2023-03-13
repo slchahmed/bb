@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>info</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{projet?.Titre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item><h3>Titre  :</h3><h5>{{projet?.Titre}}</h5></ion-item>
+        <ion-item><h3>Chef de projet  :</h3><h5>{{projet?.chef}}</h5></ion-item>
+        <h3>Equipe de projet</h3>
+        <ion-item  lines="none" *ngFor="let member of projet?.equipe"><ion-icon name="people-outline"></ion-icon>{{member}}</ion-item>
+        <h3>Taches</h3>
+        <ion-item  lines="none" *ngFor="let tache of projet?.taches"> 
+          <ion-label>{{tache}}</ion-label></ion-item>
+        <ion-item>status  : {{projet?.status}}</ion-item>
+        <ion-item>de    :{{projet?.date_debut}}     a      :{{projet?.date_fin}}</ion-item>
+      </ion-col>
+      <ion-col>
+        <h2>Sujet du projet</h2>
+        <ion-item >{{projet?.sujet}}</ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+   
+    <ion-item></ion-item>
+  
+  </ion-list>
 </ion-content>
