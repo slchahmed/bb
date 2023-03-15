@@ -8,14 +8,20 @@ import { projet, ProjetService } from 'src/app/login/projet.service';
   styleUrls: ['./date-list.page.scss'],
 })
 export class DateListPage implements OnInit {
-  date!:string |null;
+  date!:any;
   projets:projet[] =[]
   constructor(private activerouter:ActivatedRoute  , private service:ProjetService) { }
 
   ngOnInit() {
     this.activerouter.paramMap.subscribe(paramap =>{
       this.date = paramap.get('date')
-
+     
+      this.date= new Date(this.date).getTime();
+      const date_d = new Date(this.date);
+      const dateString_d = date_d.toLocaleString()
+      this.date = dateString_d
+     
+     
     })
 
     this.service.getprojets().subscribe(projets =>{
@@ -37,7 +43,7 @@ export class DateListPage implements OnInit {
          const date_f = new Date(projet.date_fin);
          const dateString_f = date_f.toLocaleString()
          projet.date_fin = dateString_f
- 
+         
          const progress = elapsed / totalTime;
  
          if (elapsed <= 0) {
@@ -67,16 +73,14 @@ export class DateListPage implements OnInit {
  
          }
       
-         const date_debut = new Date(projet.date_debut);
-         const date_fin = new Date(projet.date_fin);
-
-// Format the date in the ISO 8601 format
-        projet.date_debut = date_debut.toISOString();
-        projet.date_fin = date_fin.toISOString();
-     
-        projet.date_debut = projet.date_debut.split('T')[0]; 
-        projet.date_fin = projet.date_fin.split('T')[0]; 
-        this.date = this.date!.split('T')[0]
+         
+       
+        this.date = this.date.split(',')[0];
+        projet.date_debut = projet.date_debut.split(',')[0]; 
+        projet.date_fin = projet.date_fin.split(',')[0]; 
+        this.date = this.date!.split(',')[0]
+        
+        
         if(projet.date_fin == this.date){
          this.projets.push(projet)
         }

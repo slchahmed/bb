@@ -18,7 +18,7 @@ export class DashPage implements OnInit {
   G!:number
   F!:number   
   P!:number   
-  date_impo:string[] =[];
+
   passe_delai:number = 0
   
  constructor(private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
@@ -61,6 +61,7 @@ export class DashPage implements OnInit {
           projet.status = 'behind schedule';
           projet.badgeColor = '#ff0404';
           this.P=this.P+1
+          this.sendNotification()
           
 
         } 
@@ -82,16 +83,10 @@ export class DashPage implements OnInit {
           this.passe_delai=this.passe_delai + 1
          }
 
-        const date_debut_temp = new Date(projet.date_debut);
-        const date_fin_temp = new Date(projet.date_fin);
-        
-        projet.date_debut = date_debut_temp.toISOString();
-        projet.date_fin = date_fin_temp.toISOString();
-        projet.date_debut = projet.date_debut.split('.')[0]; 
-        projet.date_fin = projet.date_fin.split('.')[0]; 
-        this.date_impo.push(projet.date_fin)
-        projet.date_debut = projet.date_debut.split('T')[0]; 
-        projet.date_fin = projet.date_fin.split('T')[0]; 
+      
+      
+        projet.date_debut = projet.date_debut.split(',')[0]; 
+        projet.date_fin = projet.date_fin.split(',')[0]; 
       
      }
      this.projets=projets;
@@ -106,7 +101,6 @@ export class DashPage implements OnInit {
  ionViewDidleave(){
    this.T=0
    this.passe_delai=0
-  
  }
 
 
@@ -127,7 +121,7 @@ handleChange(value:string){
  this.search_result = this.projets.filter(d => d.Titre.toLowerCase().indexOf(query) > -1);
 
   }
-  async showAlert() {
+ async showAlert() {
     const alert = await this.alertController.create({
       header:'la modification des recordes necessite un visite de site web ! ',
       subHeader: 'Etes-vous d`daccord?',
