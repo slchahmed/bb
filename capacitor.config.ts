@@ -7,8 +7,8 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   plugins:{
    LocalNotifications:{
-    smallIcon:'ic_stat_download',
-    iconColor:'#ff0000',
+    smallIcon:'ic_stat_checkbox',
+    iconColor:'#3661EC',
    }
   }
 };
