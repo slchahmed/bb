@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>dashboard</ion-title>
-    <ion-buttons style="font-size: 30px;" slot="end" [routerLink]="['notifications']">
+    <ion-buttons style="font-size: 30px; cursor:pointer;" slot="end" [routerLink]="['notifications']">
       <ion-badge color="danger">{{passe_delai}}</ion-badge>
       <ion-icon  name="notifications"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="moud">
   <ion-grid class="body">
     <ion-row>
       <!-- cards columns -->
@@ -24,7 +24,7 @@
                 <ion-row>
                   <ion-col>
                     <ion-card-header >
-                      <ion-card-title>Projet retarde</ion-card-title>
+                      <ion-card-title>passé le délai</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <div class="avatar4"><div class="jhon">{{P}}</div></div>
@@ -56,7 +56,7 @@
                 <ion-row>
                   <ion-col>
                     <ion-card-header >
-                      <ion-card-title>Totaliter de projet</ion-card-title>
+                      <ion-card-title>Totalité de projets</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <div class="avatar2"> {{T}}</div>
@@ -71,7 +71,7 @@
                 <ion-row>
                   <ion-col>
                     <ion-card-header >
-                      <ion-card-title> Projet terminer </ion-card-title>
+                      <ion-card-title> Projets terminé</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <div class="avatar3">{{F}}</div>
@@ -90,13 +90,13 @@
   <ion-grid>
     <ion-row>
       <ion-col offset-md="2">
-        <div class="overflow">
+        <div class="overflow_container">
           <ion-row>
             <ion-col size="5">
               <h2>Projets</h2>
             </ion-col>
             <ion-col size="7" >
-              <ion-searchbar  color="dark" ngModel #value='ngModel' [debounce]="" (ionChange)="handleChange(value.value)"></ion-searchbar>
+              <ion-searchbar  color="Medium" ngModel #value='ngModel' [debounce]="" (ionChange)="handleChange(value.value)"></ion-searchbar>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -111,8 +111,10 @@
                     <ion-col>Date-fin</ion-col>
                    
                   </ion-row>
-                
-                <ion-row class="rows_data" *ngFor="let projet of search_result">
+                <div class="overflow">
+
+               
+                <ion-row class="rows_data" *ngFor="let projet of search_result"  style=" cursor:e-resize;">
                   <ion-item-sliding class="slider">
                     <ion-item-options side="start">
                       <ion-item-option style="background-color: #2d38d3;" [routerLink]="[projet.id]"><ion-icon name="eye-outline"></ion-icon></ion-item-option>
@@ -130,6 +132,7 @@
                   </ion-item-sliding>
                   
                 </ion-row>
+              </div>
               </ion-grid>
           </ion-list> 
         </ion-col>

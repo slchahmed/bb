@@ -7,10 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-datetime #datetime
-  [showDefaultButtons]="true"
-  doneText="trouver"
-  cancelText="Annuler" 
-  (ionChange)="pick_date(datetime.value)"></ion-datetime>
+<ion-content color="moud">
+  <div class="div">
+
+    <ion-datetime #datetime
+    presentation="date"
+    [showDefaultButtons]="true"
+    doneText="trouver"
+    cancelText="Annuler" 
+    (ionChange)="pick_date(datetime.value)"></ion-datetime>
+  </div>
 </ion-content>

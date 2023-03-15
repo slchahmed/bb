@@ -18,7 +18,7 @@
       <ion-col>Date-fin</ion-col>
       <ion-col>status</ion-col>
     </ion-row>
-  
+    <ion-row *ngIf="!projets">try another date</ion-row>
   <ion-row class="rows_data" *ngFor="let projet of projets">
     <ion-item-sliding class="slider">
       <ion-item-options side="start">
