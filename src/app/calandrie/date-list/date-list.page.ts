@@ -85,12 +85,8 @@ export class DateListPage implements OnInit {
          this.projets.push(projet)
         }
 
+      } 
        
-      }
-     
-      
-       
-    
     })
   }
 }

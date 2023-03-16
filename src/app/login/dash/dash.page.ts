@@ -32,7 +32,7 @@ export class DashPage implements OnInit {
     this.G=0
     this.F=0
     this.P=0
-    
+    this.passe_delai = 0
      for(let projet of projets){
         
         this.T=this.T+1
@@ -61,7 +61,7 @@ export class DashPage implements OnInit {
           projet.status = 'behind schedule';
           projet.badgeColor = '#ff0404';
           this.P=this.P+1
-          this.sendNotification()
+          this.sendNotification(projet.Titre)
           
 
         } 
@@ -104,12 +104,12 @@ export class DashPage implements OnInit {
  }
 
 
- async sendNotification(){
+ async sendNotification(titre:string){
   await LocalNotifications.schedule({
     notifications:[
       {
         title:"important",
-        body:'project have passed the date',
+        body:`project ${titre} have passed the date`,
         id:1
       }
     ]

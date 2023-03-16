@@ -67,16 +67,11 @@ export class NotificationsPage implements OnInit {
         }
         if (projet.status == 'behind schedule'){
          this.important.push(projet)
+         console.log(this.important)
 
         }
-        const date_debut = new Date(projet.date_debut);
-        const date_fin = new Date(projet.date_fin);
-
-// Format the date in the ISO 8601 format
-       projet.date_debut = date_debut.toISOString();
-       projet.date_fin = date_fin.toISOString();
-       projet.date_debut = projet.date_debut.split('T')[0]; 
-       projet.date_fin = projet.date_fin.split('T')[0]; 
+       projet.date_debut = projet.date_debut.split(',')[0]; 
+       projet.date_fin = projet.date_fin.split(',')[0]; 
     
         
      }

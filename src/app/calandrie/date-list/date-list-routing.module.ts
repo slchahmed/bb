@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: DateListPage
-  }
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('../../login/dash/info/info.module').then( m => m.InfoPageModule)
+  },
 ];
 
 @NgModule({
