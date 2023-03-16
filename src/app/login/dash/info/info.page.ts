@@ -30,7 +30,7 @@ export class InfoPage implements OnInit {
         projet['badgeColor'] = 'hsl(58,100%,54%)';
        
       }
-       if ( projet['status'] == 'behind schedule') {
+       if ( projet['status'] == 'Behind schedule') {
         
         projet['badgeColor'] = '#ff0404';
      

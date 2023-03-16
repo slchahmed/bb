@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
     <ion-title>{{projet?.Titre}}</ion-title>
   </ion-toolbar>
@@ -18,7 +18,7 @@
         <h3>Equipe de projet :</h3>
         <ion-item  lines="none" *ngFor="let member of projet?.equipe"><ion-icon name="people-outline"></ion-icon>{{member}}</ion-item>
       <h3>status  :</h3>
-        <ion-item> <span [style.color]="projet?.badgeColor">{{projet?.status}}</span></ion-item>
+        <ion-item><span [style.color]="projet?.badgeColor">{{projet?.status}}</span></ion-item>
 
         <h3><ion-icon name="calendar-number-outline"></ion-icon></h3>
 
