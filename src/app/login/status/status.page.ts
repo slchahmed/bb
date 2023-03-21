@@ -50,9 +50,9 @@ export class StatusPage implements OnInit {
 
         const progress = elapsed / totalTime;
 
-        if (elapsed <= 0) {
+        if (progress <= 0) {
           projet.status = 'Not started';
-          projet.badgeColor = 'hsl(58,100%,54%)';
+          projet.badgeColor = 'primary';
          
         }
          if (progress >= 1 && projet.status !== 'Completed') {
@@ -62,7 +62,7 @@ export class StatusPage implements OnInit {
           
 
         } 
-        if (progress <= 0.6 && projet.status !=='Completed') {
+        if (progress <= 1 && progress>0 && projet.status !=='Completed') {
           projet.status = 'In progress';
           projet.badgeColor = '#FDA349';
           this.G=this.G+1
