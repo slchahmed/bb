@@ -90,10 +90,12 @@ ion-card {
 }
 
 .titles{
-    color: #727272;
-    border:1px solid #dbdbdba8;
+    color: #000000;
+    border:1px solid #dbdbdbcc;
+    height: 40px;
     border-radius: 7px;
-   
+    background-color:#ebeef3 ;
+    // background:;
 }
 
 .list_item{    
@@ -133,4 +135,10 @@ ion-searchbar {
     overflow-y: auto ;
     border-radius: 14px;
     background-color: white;
+}
+.hiden-text{
+    width: 70px; /* set a fixed width for the element */
+    white-space: nowrap; /* prevent the text from wrapping */
+    overflow: hidden; /* hide any overflowing text */
+    text-overflow: ellipsis;
 }

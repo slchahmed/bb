@@ -14,7 +14,8 @@ export interface projet{
   badgeColor?:string;
   Equipe?:string;
   Tache?:string;
-  taches?:string[];
+  tache:{title?:string,isdone?:boolean};
+  taches?:{isdone?:boolean,title?:string}[];
 }
 
 @Injectable({

@@ -32,7 +32,7 @@
                     <ion-col class="ion-text-center">status</ion-col>
                   </ion-row>
                 
-                <ion-row class="rows_data" *ngFor="let projet of search_result">
+                <ion-row class="rows_data" *ngFor="let projet of search_result | paginate: { itemsPerPage: 8, currentPage: p }">
                   <ion-item-sliding class="slider">
                     <ion-item-options side="start">
                       <ion-item-option style="background-color: #2d38d3;" [routerLink]="[projet.id]"><ion-icon name="eye-outline"></ion-icon></ion-item-option>
@@ -55,6 +55,15 @@
           </ion-list> 
         </ion-col>
         </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col class="ion-text-center">
+            <div class="ion-text-center">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  
+            </div>
+ 
+          </ion-col>
+         </ion-row>
         </div>
       </ion-col>
     </ion-row>

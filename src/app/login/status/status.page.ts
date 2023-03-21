@@ -16,7 +16,8 @@ export class StatusPage implements OnInit {
   T!:number
   G!:number
   F!:number   
-  P!:number   
+  P!:number  
+  p:number = 1 
   
  constructor(private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
   }

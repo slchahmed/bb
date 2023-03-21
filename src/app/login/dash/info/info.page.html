@@ -31,13 +31,16 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <h2>Sujet du projet</h2>
-        <ion-item class="sujet" lines="none">{{projet?.sujet}}</ion-item>
         <h3>Taches:</h3>
 
         <ion-item  lines="none" *ngFor="let tache of projet?.taches">
-          <ion-icon name="checkmark-done-circle-outline"></ion-icon><ion-label>{{tache}}</ion-label></ion-item>
-      </ion-col>
+          <ion-icon *ngIf="!tache.isdone" name="checkmark-done-circle-outline"></ion-icon> <ion-icon *ngIf="tache.isdone"  color="tertiary" name="checkmark-done-circle-outline"></ion-icon><ion-label *ngIf="!tache.isdone">{{tache.title}}</ion-label><del *ngIf="tache.isdone">{{tache.title}}</del>
+          
+        </ion-item>
+     
+        <h2>Sujet du projet</h2>
+        <ion-item class="sujet" lines="none">{{projet?.sujet}}</ion-item>
+        </ion-col>
     </ion-row>
   </ion-grid>
   <ion-list>
