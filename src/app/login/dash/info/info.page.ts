@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Auth } from '@angular/fire/auth';
-import { collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, Firestore, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { user } from '../../auth.service';
 import { projet, ProjetService } from '../../projet.service';
@@ -18,6 +18,7 @@ export class InfoPage implements OnInit {
   id!:string
   user!:user[] 
   chef!:user
+
   constructor(private auth:Auth,private active_router:ActivatedRoute,private service:ProjetService,private alertcontroller:AlertController,private firestore:Firestore) { }
 
   ngOnInit() {
@@ -25,28 +26,61 @@ export class InfoPage implements OnInit {
      this.id= paramap.get('id') as string
     })
     this.service.getprojetById(this.id).subscribe(projet=>{
-   
-      if (projet['status'] == 'Not started') {
-        projet['badgeColor'] = 'hsl(58,100%,54%)';
+      projet['date_debut']= new Date(projet['date_debut']).getTime();
+      projet['date_fin'] = new Date(projet['date_fin']).getTime();
+      const currentDate = new Date();
+      const totalTime = projet['date_fin'] - projet['date_debut'];
+      const elapsed = currentDate.getTime() - projet['date_debut'];
+
+      const date_d = new Date(projet['date_debut']);
+      const dateString_d = date_d.toLocaleString()
+      projet['date_debut'] = dateString_d
+
+      const date_f = new Date(projet['date_fin']);
+      const dateString_f = date_f.toLocaleString()
+      projet['date_fin'] = dateString_f
+
+      const progress = elapsed / totalTime;
+
+      if (progress <= 0) {
+        projet['status'] = 'Not started';
+        projet['badgeColor'] = 'primary';
        
       }
-       if ( projet['status'] == 'Behind schedule') {
-        
+       else if (progress >= 1 && projet['status'] !== 'Completed') {
+        projet['status'] = 'Behind schedule';
         projet['badgeColor'] = '#ff0404';
+
+        
+        
+
+      } 
+      else if (progress <= 1 && progress > 0 && projet['status'] !=='Completed') {
+        projet['status'] = 'In progress';
+        projet['badgeColor'] = '#FDA349';
      
         
 
       } 
-      if (projet['status'] =='In progress') {
-        projet['badgeColor'] = '#FDA349';
-    
-        
-
-      } 
-       if(projet['status'] == 'Completed'){
-        projet['badgeColor'] = '#55ad48';         
+       else if(projet['status'] == 'Completed'){
+        projet['badgeColor'] = '#55ad48';
+  
+         
 
       }
+
+    
+
+    
+    
+      projet['date_debut'] = projet['date_debut'].split(',')[0]; 
+      projet['date_fin'] = projet['date_fin'].split(',')[0]; 
+      
+      // this.updateprojet(projet as projet)
+    
+    
+        
+  
       this.getuser().subscribe(user=>{
         this.user = user
       
@@ -67,5 +101,10 @@ export class InfoPage implements OnInit {
     const usersRef = collection(this.firestore, 'users');
     const q = query(usersRef, where("email", "==", usermail));
     return collectionData(q, { idField: 'id' })as unknown as Observable<user[]>
+  }
+
+  updateprojet(projet:projet|null){
+    const projetref = doc(this.firestore,`projets/${projet?.id}`);
+    return updateDoc(projetref,{Titre:projet?.Titre,sujet:projet?.sujet,chef:projet?.chef,date_debut:projet?.date_debut,date_fin:projet?.date_fin,equipe:projet?.equipe,status:projet?.status,taches:projet?.taches})
   }
 }

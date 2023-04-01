@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { AlertController } from '@ionic/angular';
@@ -18,10 +19,10 @@ export class DashPage implements OnInit {
   G!:number
   F!:number   
   P!:number   
-
-  passe_delai:number = 0
+  d:number = 1
+  passe_delai:number = 1
   
- constructor(private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
+ constructor(private firestore:Firestore,private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
   }
 
   async ngOnInit() {
@@ -57,37 +58,38 @@ export class DashPage implements OnInit {
           projet.badgeColor = 'primary';
          
         }
-         if (progress >= 1 && projet.status !== 'Completed') {
-          projet.status = 'behind schedule';
+         else if (progress >= 1 && projet.status !== 'Completed') {
+          projet.status = 'Behind schedule';
           projet.badgeColor = '#ff0404';
           this.P=this.P+1
-          this.sendNotification(projet.Titre)
+          
           
 
         } 
-        if (progress <= 1 && progress > 0 && projet.status !=='Completed') {
+        else if (progress <= 1 && progress > 0 && projet.status !=='Completed') {
           projet.status = 'In progress';
           projet.badgeColor = '#FDA349';
           this.G=this.G+1
           
 
         } 
-         if(projet.status == 'Completed'){
+         else if(projet.status == 'Completed'){
           projet.badgeColor = '#55ad48';
           this.F=this.F+1
            
 
         }
 
-        if (projet.status == 'behind schedule'){
+        if (projet.status == 'Behind schedule'){
           this.passe_delai=this.passe_delai + 1
+          this.d=this.d+1
+          this.sendNotification(projet.Titre,this.d)
          }
 
       
       
         projet.date_debut = projet.date_debut.split(',')[0]; 
         projet.date_fin = projet.date_fin.split(',')[0]; 
-      
      }
      this.projets=projets;
      this.search_result=this.projets.slice()
@@ -96,7 +98,9 @@ export class DashPage implements OnInit {
 
      await  LocalNotifications.requestPermissions();
 
-
+  for(let projet of this.projets){
+    this.updateprojet(projet)
+  }
  }
  ionViewDidleave(){
    this.T=0
@@ -104,13 +108,13 @@ export class DashPage implements OnInit {
  }
 
 
- async sendNotification(titre:string){
+ async sendNotification(titre:string,d:number){
   await LocalNotifications.schedule({
     notifications:[
       {
         title:"important",
         body:`project ${titre} have passed the date`,
-        id:1
+        id:d
       }
     ]
   })
@@ -139,6 +143,11 @@ handleChange(value:string){
     ],
     })
     await alert.present();
+  }
+
+  updateprojet(projet:projet|null){
+    const projetref = doc(this.firestore,`projets/${projet?.id}`);
+    return updateDoc(projetref,{Titre:projet?.Titre,sujet:projet?.sujet,chef:projet?.chef,date_debut:projet?.date_debut,date_fin:projet?.date_fin,equipe:projet?.equipe,status:projet?.status,taches:projet?.taches})
   }
   
 }

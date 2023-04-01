@@ -14,4 +14,5 @@ export class AppComponent {
    await this.authservice.logout()
   this.router.navigateByUrl('/',{replaceUrl:true});
   }
+  
 }

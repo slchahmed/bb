@@ -2,9 +2,13 @@ ion-card{
     margin-top:70px;
     justify-content: space-between;
     width: 450px;
-    height: 500px;
+    height: auto;
     border-radius: 10px;
     box-shadow: 8px 3px 22px 10px rgba(150,150 ,150, 0.11);
+}
+a{
+    text-decoration: none;
+    color: blue;
 }
 ion-input {
     border-radius: 6px;

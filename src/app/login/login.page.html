@@ -12,20 +12,21 @@
             <ion-item >
               <ion-icon name="mail-outline" color="primary"></ion-icon>
               <ion-label position="">Email</ion-label>
-              <ion-input ngModel type="text" name="email" #email="ngModel" required></ion-input>
+              <ion-input  ngModel type="email" name="email" #email="ngModel" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com" email [ngClass]="{'invalid-input': email.invalid && email.touched}"></ion-input>
             </ion-item>
-            <ion-note slot="error" color="danger" *ngIf="email.invalid&&email.touched">email rquired</ion-note>
+            <ion-note slot="error" color="danger" *ngIf="email.touched && email.errors?.['required']">L'e-mail est requis</ion-note>
+            <ion-note slot="error" color="danger" *ngIf="email.touched && email.errors?.['email']">Format d'email invalide</ion-note>
             <ion-item>
               <ion-icon name="bag-outline" color="primary"></ion-icon>
-              <ion-label position="">password</ion-label>
+              <ion-label position="">mot de passe</ion-label>
               <ion-input ngModel type="password" name="pass" #pass="ngModel" required minlength="8"></ion-input>
             </ion-item>
-            <ion-note color="danger" *ngIf="pass.invalid&&pass.touched">invalid password minimal lenght 8 char</ion-note>
-            <div class="button">
+            <ion-note slot="error" color="danger" *ngIf="pass.touched &&pass.errors?.['required']">Mot de passe requis</ion-note>
+            <ion-note slot="error" color="danger" *ngIf="pass.touched && pass.errors?.['minlength']">Le mot de passe doit comporter au moins 8 caractères</ion-note><div class="button">
               <ion-button type="submit" [disabled]="!f.valid">Connection</ion-button>
             </div>
           </form>
-          <ion-note >Si vous n'avez pas de compte, veuillez contacter l'administrateur</ion-note>
+          <ion-note >Si vous n'avez pas de compte, veuillez contacter l'administrateur <a href="https://wa.me/42514879">ici</a></ion-note>
         </ion-card-content>
       </ion-card>
   </ion-grid>

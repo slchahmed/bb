@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -37,4 +38,5 @@ export class LoginPage implements OnInit {
   }
 
 
+  
 }
