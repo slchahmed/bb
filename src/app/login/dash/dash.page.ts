@@ -113,7 +113,7 @@ export class DashPage implements OnInit {
     notifications:[
       {
         title:"important",
-        body:`project ${titre} have passed the date`,
+        body:`le projet ${titre} a dépassé la date`,
         id:d
       }
     ]
