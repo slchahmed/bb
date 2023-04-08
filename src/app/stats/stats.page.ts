@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartData, ChartOptions, ChartType ,Chart} from 'chart.js';
+import { Chart} from 'chart.js';
 import { projet, ProjetService } from '../login/projet.service';
+import 'chartjs-plugin-datalabels';
+import annotationPlugin from 'chartjs-plugin-annotation';
+Chart.register(annotationPlugin);
 
 @Component({
   selector: 'app-stats',
@@ -17,23 +20,7 @@ export class StatsPage implements OnInit {
   ngOnInit() {
     this.serviceprojects.getprojets().subscribe(projets =>{
        for(let projet of projets){       
-        projet.date_debut= new Date(projet.date_debut).getTime();
-        projet.date_fin = new Date(projet.date_fin).getTime();
-        const currentDate = new Date();
-        const totalTime = projet.date_fin - projet.date_debut;
-        const elapsed = currentDate.getTime() - projet.date_debut;
 
-        const date_d = new Date(projet.date_debut);
-        const dateString_d = date_d.toLocaleString()
-        projet.date_debut = dateString_d
-
-        const date_f = new Date(projet.date_fin);
-        const dateString_f = date_f.toLocaleString()
-        projet.date_fin = dateString_f
-
-        const progress = elapsed / totalTime;
-       
-          
           if (projet.status == 'Not started') {
             
             this.N = this.N+1
@@ -54,10 +41,6 @@ export class StatsPage implements OnInit {
       
   
      }
-      console.log(this.N)
-      console.log(this.G)
-      console.log(this.T)
-      console.log(this.P)
      this.projets=projets
     this.rederchartbar(this.N,this.G,this.T,this.P)
 
@@ -68,7 +51,7 @@ export class StatsPage implements OnInit {
 }
 
 rederchartbar(N:number,G:number,T:number,P:number){
- 
+  const Total = N + G +P + T
   const chart = new Chart('charbar', {
     type: 'line',
     data: {
@@ -91,20 +74,44 @@ rederchartbar(N:number,G:number,T:number,P:number){
           '#ff0404'
         ],
         pointBorderColor: '#fff',
-        pointRadius: 10,
-        pointHoverRadius: 17
+        pointRadius: 5,
+        pointHoverRadius: 10
 
       },]
     },
     options: {
-   
+    
       aspectRatio: -16,
       plugins:{
-        
+        legend: { 
+          display: false
+        }, 
+         annotation: {
+          annotations: {
+            label1: {
+              type: 'label',
+              xValue: 3,
+              yValue: P,
+              xAdjust: -150,
+              yAdjust: -20,
+              backgroundColor: 'rgba(245,245,245)',
+              content: ["besoin d'attention ","les projets non terminés sont trop élevés"],
+              textAlign: 'start',
+              font: {
+                size: 9
+              },
+              callout: {
+                display: true,
+                side: 15
+              }
+            }
+          }
+        }
       },
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          suggestedMax: Total,
         }
       }
     }
@@ -112,9 +119,15 @@ rederchartbar(N:number,G:number,T:number,P:number){
 }
 
 rederchartzeg(N:number,G:number,T:number,P:number){
-
+  const Total = N + G + T + P
+  console.log(Total)
+  N = N*100/Total
+  G = G*100/Total
+  T = T*100/Total
+  P = P*100/Total
   const chart = new Chart('charzeg', {
     type: 'doughnut',
+    
     data: {
       labels: ['pas commencé', 'En cours', 'Complété', 'passer la date'],
       datasets: [{
@@ -135,11 +148,47 @@ rederchartzeg(N:number,G:number,T:number,P:number){
       plugins:{
        legend: {
           position: 'right'
+        },
+        datalabels: {
+          formatter: function(value, context) {
+            return value.toFixed(2) + '%';
+          },
+          color: '#fff',
+          borderRadius: 3,
+          anchor: 'end',
+          align: 'start'
+        },
+        annotation: {
+          annotations: {
+            label1: {
+              type: 'label',
+              xValue: 2.5,
+              yValue: 60,
+              backgroundColor: '#F6F7FB',
+              content: ['Total',Total.toString()],
+              font: {
+                size: 16,
+              }
+            }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              var label = context.label || '';
+              if (label) {
+                label += ': ';
+              }
+              if (context.parsed) {
+                label += context.parsed.toFixed(2) + '%';
+              }
+              return label;
+            }
+          }
         }
         
       },
     }
   });
 }
-
 }

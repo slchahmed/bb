@@ -7,13 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="moud">
-  <div class="div " >
+<ion-content class="ion-justify-content-center  ion-text-center"  color="moud">
+<ion-grid>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    
+    <ion-col size="11" offset="0.2" class="ion-justify-content-center">
+      <div class="ion-justify-content-center ion-align-items-center">
+        <ion-datetime #datetime
+          [showDefaultButtons]="true"
+          doneText="trouver"
+          cancelText="Annuler" 
+          (ionChange)="pick_date(datetime.value)">
+        </ion-datetime>
+      
+     </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+    
 
-    <ion-datetime style="width: 100%;margin-left: 35px; margin-top: 25%;" #datetime
-    [showDefaultButtons]="true"
-    doneText="trouver"
-    cancelText="Annuler" 
-    (ionChange)="pick_date(datetime.value)"></ion-datetime>
-  </div>
 </ion-content>

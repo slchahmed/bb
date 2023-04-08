@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>dashboard</ion-title>
+    <ion-title>Tableau de bord</ion-title>
     <ion-buttons style="font-size: 30px; cursor:pointer;" slot="end" [routerLink]="['notifications']">
       <ion-badge color="danger">{{passe_delai}}</ion-badge>
       <ion-icon  name="notifications"></ion-icon>
@@ -24,7 +24,7 @@
                 <ion-row>
                   <ion-col>
                     <ion-card-header >
-                      <ion-card-title>passé le délai</ion-card-title>
+                      <ion-card-title>Projets en retard</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <div class="avatar4"><div class="jhon">{{P}}</div></div>
@@ -71,7 +71,7 @@
                 <ion-row>
                   <ion-col>
                     <ion-card-header >
-                      <ion-card-title> Projets terminé</ion-card-title>
+                      <ion-card-title> Projets terminés</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                       <div class="avatar3">{{F}}</div>
@@ -96,7 +96,7 @@
               <h2>Projets</h2>
             </ion-col>
             <ion-col size="7" >
-              <ion-searchbar  color="Medium" ngModel #value='ngModel' [debounce]="" (ionChange)="handleChange(value.value)"></ion-searchbar>
+              <ion-searchbar placeholder="Recherche"  color="Medium" ngModel #value='ngModel' [debounce]="" (ionChange)="handleChange(value.value)"></ion-searchbar>
             </ion-col>
           </ion-row>
           <ion-row>
