@@ -16,6 +16,10 @@ const routes: Routes = [
     path: ':id',
     loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
   },
+  {
+    path: 'user-profile/:email',
+    loadChildren: () => import('../../user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+  },
 
 ];
 

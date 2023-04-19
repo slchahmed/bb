@@ -1,0 +1,19 @@
+.avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ion-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  ion-row{
+    padding:8px 0px 8px 0;
+  }
+  
+  ion-badge{
+    border-radius: 50px;
+    width: 20px;
+    height: 20px;
+  }

@@ -8,6 +8,11 @@
       <ion-badge color="danger">{{passe_delai}}</ion-badge>
       <ion-icon  name="notifications"></ion-icon>
     </ion-buttons>
+  <ion-buttons style="cursor:pointer;height: 20px;" slot="end" [routerLink]="['user-profile',user?.email]">
+    <ion-avatar style="height: 40px;width: 40px;" slot="start">
+      <img alt="Silhouette of a person's head" [src]="user1?.imgURL" />
+    </ion-avatar>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

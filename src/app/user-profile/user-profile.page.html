@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-back-button defaultHref="/dashboard" slot="start"></ion-back-button>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="avatar">
+          <ion-avatar style="width: 160px;height: 160px;box-shadow: 8px 3px 22px 10px rgba(150,150 ,150, 0.11);">
+            <img *ngIf="user?.imgURL" alt="Silhouette of a person's head" [src]="user?.imgURL" />
+            <img *ngIf="!user?.imgURL" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-icon style="cursor:pointer;" name="create-outline" (click)="change_photo()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row style="border-bottom: solid 1px;color: white;background: linear-gradient(to right, #3661EC , #00C2FF);border-radius: 5px;">
+        <ion-col>Coordonnées</ion-col>
+      </ion-row>
+      <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col><ion-icon name="person-outline">nom</ion-icon></ion-col>
+        <ion-col>{{user?.nom}}</ion-col>
+      </ion-row>
+      <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col><ion-icon name="mail-outline"></ion-icon></ion-col>
+        <ion-col>{{user?.email}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-icon name="call-outline"></ion-icon></ion-col>
+        <ion-col>{{user?.phone_number}}</ion-col>
+      </ion-row>
+      <ion-row  style="color: white;background: linear-gradient(to right, #3661EC , #00C2FF);border-radius: 5px;">
+        <ion-col>Statistiques</ion-col>
+      </ion-row>
+      <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col>Chef de  </ion-col>
+        <ion-col>{{T}}</ion-col>
+      </ion-row>
+      <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col>Projet termines</ion-col>
+        <ion-col> <ion-badge style="color: black;background: white;box-shadow: 1px 1px 7px 0.1px #34b74a">{{F}}</ion-badge></ion-col>
+      </ion-row>
+      <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col>Projet en cours</ion-col>
+        <ion-col><ion-badge style="color: black;background: white;box-shadow: 1px 1px 7px 0.1px #FDA349">{{G}}</ion-badge></ion-col>
+      </ion-row>
+      <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col>Projet en retard</ion-col>
+        <ion-col><ion-badge style="color: black;background: white;box-shadow: 1px 1px 6px 0.1px #ff0404 ">{{P}}</ion-badge></ion-col>
+      </ion-row>
+      <ion-row  style="color: white;background: linear-gradient(to right, #3661EC , #00C2FF);border-radius: 5px;">
+        <ion-col>Total</ion-col>
+        <ion-col>{{T}}</ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col class="avatar"><ion-button (click)="deleteacount()" color="danger" style="width: 280px;"><ion-icon name="trash-outline"></ion-icon>Suprimer le compte</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

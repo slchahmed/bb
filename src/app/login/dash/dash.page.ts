@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { collection, collectionData, doc, Firestore, query, where,updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { AlertController } from '@ionic/angular';
 import { projet, ProjetService } from '../projet.service'
+import { user } from '../auth.service';
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.page.html',
@@ -12,6 +14,7 @@ import { projet, ProjetService } from '../projet.service'
 })
 export class DashPage implements OnInit {
   user = this.auth.currentUser;
+  user1!:user | undefined
   projets!:projet[];
   search_result!:projet[];
   columns = [{ prop: 'Title' }, { name: 'date_debut' }, { name: 'date_fin' },{ name: 'status' }];
@@ -21,13 +24,19 @@ export class DashPage implements OnInit {
   P!:number   
   d:number = 1
   passe_delai:number = 1
+ 
   
  constructor(private firestore:Firestore,private auth:Auth,private serviceprojects:ProjetService,private alertController:AlertController,private router:Router) {
   }
 
   async ngOnInit() {
+    this.getuser().subscribe(user=>{
+      const chef = user
+      this.user1 = chef[0]
+      // console.log(this.user1)
+    })
    
-   this.serviceprojects.getprojets().subscribe(projets =>{
+    const projetsSubscription = this.serviceprojects.getprojets().subscribe(projets =>{
    
     this.T=0
     this.G=0
@@ -91,16 +100,17 @@ export class DashPage implements OnInit {
         projet.date_debut = projet.date_debut.split(',')[0]; 
         projet.date_fin = projet.date_fin.split(',')[0]; 
      }
+
      this.projets=projets;
      this.search_result=this.projets.slice()
+     this.update(this.projets)
+     projetsSubscription.unsubscribe()
+
    })
+    
 
-
-     await  LocalNotifications.requestPermissions();
-
-  for(let projet of this.projets){
-    this.updateprojet(projet)
-  }
+    await  LocalNotifications.requestPermissions();
+ 
  }
  ionViewDidleave(){
    this.T=0
@@ -148,6 +158,20 @@ handleChange(value:string){
   updateprojet(projet:projet|null){
     const projetref = doc(this.firestore,`projets/${projet?.id}`);
     return updateDoc(projetref,{Titre:projet?.Titre,sujet:projet?.sujet,chef:projet?.chef,date_debut:projet?.date_debut,date_fin:projet?.date_fin,equipe:projet?.equipe,status:projet?.status,taches:projet?.taches})
+  }
+  getuser(): Observable<user[]> {
+    const usermail = this.auth.currentUser?.email;
+    const usersRef = collection(this.firestore, 'users');
+    const q = query(usersRef, where("email", "==", usermail));
+    return collectionData(q, { idField: 'id' })as unknown as Observable<user[]>
+  }
+
+  update(projets:projet[]){
+    console.log(projets)
+    for(let projet of projets){
+       this.updateprojet(projet)
+     }
+   
   }
   
 }
