@@ -43,12 +43,12 @@ export class InfoPage implements OnInit {
       const progress = elapsed / totalTime;
 
       if (progress <= 0) {
-        projet['status'] = 'Not started';
+        
         projet['badgeColor'] = 'primary';
        
       }
        else if (progress >= 1 && projet['status'] !== 'Completed') {
-        projet['status'] = 'Behind schedule';
+ 
         projet['badgeColor'] = '#ff0404';
 
         
@@ -56,7 +56,7 @@ export class InfoPage implements OnInit {
 
       } 
       else if (progress <= 1 && progress > 0 && projet['status'] !=='Completed') {
-        projet['status'] = 'In progress';
+        
         projet['badgeColor'] = '#FDA349';
      
         

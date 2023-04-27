@@ -45,22 +45,27 @@ export class DashPage implements OnInit {
     this.passe_delai = 0
      for(let projet of projets){
         
-        this.T=this.T+1
-        projet.date_debut= new Date(projet.date_debut).getTime();
-        projet.date_fin = new Date(projet.date_fin).getTime();
-        const currentDate = new Date();
-        const totalTime = projet.date_fin - projet.date_debut;
-        const elapsed = currentDate.getTime() - projet.date_debut;
+      console.log(projet.date_fin)
 
-        const date_d = new Date(projet.date_debut);
-        const dateString_d = date_d.toLocaleString()
-        projet.date_debut = dateString_d
+      this.T=this.T+1
+      projet.date_debut= new Date(projet.date_debut).getTime();
+      projet.date_fin = new Date(projet.date_fin).getTime();
+     console.log(projet.date_fin)
 
-        const date_f = new Date(projet.date_fin);
-        const dateString_f = date_f.toLocaleString()
-        projet.date_fin = dateString_f
+      const currentDate = new Date();
+      const totalTime = projet.date_fin - projet.date_debut;
+      const elapsed = currentDate.getTime() - projet.date_debut;
 
-        const progress = elapsed / totalTime;
+      const date_d = new Date(projet.date_debut);
+      const dateString_d = date_d.toLocaleString()
+      projet.date_debut = dateString_d
+
+      const date_f = new Date(projet.date_fin);
+      const dateString_f = date_f.toLocaleString()
+      projet.date_fin = dateString_f
+      console.log(projet.date_fin)
+
+      const progress = elapsed / totalTime;
 
         if (progress <= 0) {
           projet.status = 'Not started';
@@ -103,8 +108,8 @@ export class DashPage implements OnInit {
 
      this.projets=projets;
      this.search_result=this.projets.slice()
-     this.update(this.projets)
      projetsSubscription.unsubscribe()
+     this.update(this.projets)
 
    })
     
@@ -157,7 +162,7 @@ handleChange(value:string){
 
   updateprojet(projet:projet|null){
     const projetref = doc(this.firestore,`projets/${projet?.id}`);
-    return updateDoc(projetref,{Titre:projet?.Titre,sujet:projet?.sujet,chef:projet?.chef,date_debut:projet?.date_debut,date_fin:projet?.date_fin,equipe:projet?.equipe,status:projet?.status,taches:projet?.taches})
+    return updateDoc(projetref,{Titre:projet?.Titre,sujet:projet?.sujet,chef:projet?.chef,equipe:projet?.equipe,status:projet?.status,taches:projet?.taches})
   }
   getuser(): Observable<user[]> {
     const usermail = this.auth.currentUser?.email;
@@ -169,6 +174,7 @@ handleChange(value:string){
   update(projets:projet[]){
     console.log(projets)
     for(let projet of projets){
+      if(projet.status!=='Completed')
        this.updateprojet(projet)
      }
    

@@ -125,7 +125,7 @@ ion-searchbar {
     height:360px;
     padding: 10px;
     border-radius: 14px;
-    background-color: white;
+    box-shadow: 8px 3px 22px 10px rgba(150,150 ,150, 0.11);
 }
 .overflow {
     width: 100%;
@@ -134,7 +134,6 @@ ion-searchbar {
     overflow-x: auto;
     overflow-y: auto ;
     border-radius: 14px;
-    background-color: white;
 }
 .hiden-text{
     width: 70px; /* set a fixed width for the element */

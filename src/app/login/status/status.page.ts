@@ -46,7 +46,7 @@ export class StatusPage implements OnInit {
          
         }
          if (progress >= 1 && projet.status !== 'Completed') {
-          projet.status = 'behind schedule';
+          projet.status = 'Behind schedule';
           projet.badgeColor = '#ff0404';
 
           

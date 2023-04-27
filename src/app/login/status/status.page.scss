@@ -34,9 +34,9 @@ ion-card {
     width: 100%;
     height:auto;
     padding: 10px;
- 
+    box-shadow: 8px 3px 22px 10px rgba(150,150 ,150, 0.11);
     border-radius: 14px;
-    background-color: white;
+ 
 }
 ::-webkit-scrollbar {
     width: 4px;
@@ -97,10 +97,12 @@ ion-card {
 }
 
 .titles{
-    color: #727272;
-    border:1px solid #dbdbdba8;
+    color: #000000;
+    border:1px solid #dbdbdbcc;
+    height: 40px;
     border-radius: 7px;
-   
+    background-color:#ebeef3 ;
+    // background:;
 }
 
 .list_item{    
@@ -149,6 +151,7 @@ ion-searchbar {
               height: 100%;
               color: #f8f8f8;
               overflow: hidden;
+              display: none;
             }
         }
     }

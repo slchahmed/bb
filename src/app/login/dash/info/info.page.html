@@ -11,35 +11,80 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h3>Titre  :</h3>
-        <ion-item> <h5>{{projet?.Titre}}</h5></ion-item>
-        <h3>Chef de projet  :</h3>
-        <ion-item><h5>{{projet?.chef}}</h5></ion-item>
-        <h3>Equipe de projet :</h3>
-        <ion-item  lines="none" *ngFor="let member of projet?.equipe"><ion-icon name="people-outline"></ion-icon>{{member}}</ion-item>
-      <h3>status  :</h3>
-        <ion-item><span [style.color]="projet?.badgeColor">{{projet?.status}}</span></ion-item>
+        <ion-item> <h3>Titre  :</h3> <h5 class="margin-left">{{projet?.Titre}}</h5></ion-item>
+       
+        <ion-item>  <h3>Chef de projet  :</h3> <h5 class="margin-left">{{projet?.chef}}</h5></ion-item>
+       
+        <ion-item>    <h3>status  :</h3> <span class="margin-left" [style.color]="projet?.badgeColor">{{projet?.status}}</span></ion-item>
 
-        <h3><ion-icon name="calendar-number-outline"></ion-icon></h3>
-
-        <h3>Date-debut    :  </h3>
-        <ion-item>{{projet?.date_debut}}</ion-item>
-        <h3>Date-fin   :  </h3>
-        <ion-item>{{projet?.date_fin}}</ion-item>
+        <ion-item>
+          <h3><ion-icon name="calendar-number-outline"></ion-icon></h3> <h3 class="margin-left">Date-debut    :  </h3 > <span class="margin-left"> {{projet?.date_debut}}</span></ion-item>
+       
+        <ion-item>
+          <h3><ion-icon name="calendar-number-outline"></ion-icon></h3> <h3 class="margin-left">Date-fin   :  </h3><span class="margin-left"> {{projet?.date_fin}}</span> </ion-item>
       </ion-col>
     
     </ion-row>
     <ion-row>
-      <ion-col>
-        <h3>Taches:</h3>
+      <ion-col>  <ion-accordion-group expand="inset">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="primary">
+              <ion-label><h2>Sujet du projet</h2></ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-item class="sujet" lines="none">{{projet?.sujet}}</ion-item>        
+            </div>
 
-        <ion-item  lines="none" *ngFor="let tache of projet?.taches">
-          <ion-icon *ngIf="!tache.isdone" name="checkmark-done-circle-outline"></ion-icon> <ion-icon *ngIf="tache.isdone"  color="tertiary" name="checkmark-done-circle-outline"></ion-icon><ion-label *ngIf="!tache.isdone">{{tache.title}}</ion-label><del *ngIf="tache.isdone">{{tache.title}}</del>
-          
-        </ion-item>
-     
-        <h2>Sujet du projet</h2>
-        <ion-item class="sujet" lines="none">{{projet?.sujet}}</ion-item>
+          </ion-accordion>
+        </ion-accordion-group>
+        <ion-accordion-group expand="inset">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="primary">
+            <ion-label>Equipe de projet</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-item  lines="none" *ngFor="let member of projet?.equipe"><ion-icon name="people-outline"></ion-icon>{{member}}</ion-item>
+          </div>
+
+        </ion-accordion>
+      </ion-accordion-group>
+
+
+
+
+
+
+      <ion-accordion-group expand="inset">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="primary">
+            <ion-label>Taches</ion-label>
+          </ion-item>
+          <div slot="content">
+           
+            <ion-accordion-group expand="inset" *ngFor="let tache of projet?.taches;let i = index;"> 
+              <ion-accordion value="first">
+              <ion-item slot="header" color="light">
+                 <ion-label class="tache-title">
+                  
+                  <ion-icon *ngIf="!tache.isdone" name="checkmark-done-circle-outline"></ion-icon> <ion-icon *ngIf="tache.isdone"  color="tertiary" name="checkmark-done-circle-outline"></ion-icon><ion-label *ngIf="!tache.isdone">{{tache.title}}</ion-label><del *ngIf="tache.isdone">{{tache.title}}</del>
+                
+                </ion-label>
+              </ion-item>
+             <div class="tache-content ion-padding" slot="content">
+                {{tache.title}}
+             </div>
+              </ion-accordion>
+              </ion-accordion-group> 
+                  </div>
+                  
+                </ion-accordion>
+                </ion-accordion-group>  
+
+
+
+
+
+
         </ion-col>
     </ion-row>
   </ion-grid>
