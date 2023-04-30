@@ -18,6 +18,7 @@ export class InfoPage implements OnInit {
   id!:string
   user!:user[] 
   chef!:user
+  subbadgeColor!:string;
 
   constructor(private auth:Auth,private active_router:ActivatedRoute,private service:ProjetService,private alertcontroller:AlertController,private firestore:Firestore) { }
 
@@ -49,6 +50,7 @@ export class InfoPage implements OnInit {
       }
        else if (progress >= 1 && projet['status'] !== 'Completed') {
  
+        this.subbadgeColor = '#FFC1C9'
         projet['badgeColor'] = '#ff0404';
 
         
@@ -58,13 +60,14 @@ export class InfoPage implements OnInit {
       else if (progress <= 1 && progress > 0 && projet['status'] !=='Completed') {
         
         projet['badgeColor'] = '#FDA349';
+        this.subbadgeColor = '#ffe0c0'
      
         
 
       } 
        else if(projet['status'] == 'Completed'){
-        projet['badgeColor'] = '#55ad48';
-  
+        projet['badgeColor'] = '#3BAE74';         
+        this.subbadgeColor = '#d5f3db'
          
 
       }

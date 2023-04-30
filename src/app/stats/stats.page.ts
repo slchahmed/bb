@@ -87,7 +87,7 @@ rederchartbar(N:number,G:number,T:number,P:number){
           display: false
         }, 
          annotation: {
-          annotations: {
+          annotations:  P >= 4 ? {
             label1: {
               type: 'label',
               xValue: 3,
@@ -105,7 +105,7 @@ rederchartbar(N:number,G:number,T:number,P:number){
                 side: 15
               }
             }
-          }
+          } : {}
         }
       },
       scales: {
@@ -164,7 +164,7 @@ rederchartzeg(N:number,G:number,T:number,P:number){
               type: 'label',
               xValue: 2.5,
               yValue: 60,
-              backgroundColor: '#F6F7FB',
+              backgroundColor: 'white',
               content: ['Total',Total.toString()],
               font: {
                 size: 16,

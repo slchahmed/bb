@@ -59,11 +59,12 @@ export class DashPage implements OnInit {
       const date_d = new Date(projet.date_debut);
       const dateString_d = date_d.toLocaleString()
       projet.date_debut = dateString_d
+      projet.date_debut = projet.date_debut.split(',')[0]; 
 
       const date_f = new Date(projet.date_fin);
       const dateString_f = date_f.toLocaleString()
       projet.date_fin = dateString_f
-      console.log(projet.date_fin)
+      projet.date_fin = projet.date_fin.split(',')[0]; 
 
       const progress = elapsed / totalTime;
 
@@ -98,10 +99,7 @@ export class DashPage implements OnInit {
           this.passe_delai=this.passe_delai + 1
           this.d=this.d+1
           this.sendNotification(projet.Titre,this.d)
-         }
-
-      
-      
+        }
         projet.date_debut = projet.date_debut.split(',')[0]; 
         projet.date_fin = projet.date_fin.split(',')[0]; 
      }
@@ -148,7 +146,7 @@ handleChange(value:string){
         text:'ok',
         role:'confirm',
         handler:()=>{
-          this.router.navigate(['dashboard'])
+          window.open('https://pfe-3r.vercel.app/', '_system');
         } 
       },
       {

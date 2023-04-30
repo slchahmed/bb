@@ -81,7 +81,6 @@ export class UserProfilePage implements OnInit {
         quality:90,
         allowEditing:false,
         resultType:CameraResultType.Base64,
-        source:CameraSource.Photos
       })
      
       if(img){

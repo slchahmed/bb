@@ -11,17 +11,70 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-item> <h3>Titre  :</h3> <h5 class="margin-left">{{projet?.Titre}}</h5></ion-item>
-       
-        <ion-item>  <h3>Chef de projet  :</h3> <h5 class="margin-left">{{projet?.chef}}</h5></ion-item>
-       
-        <ion-item>    <h3>status  :</h3> <span class="margin-left" [style.color]="projet?.badgeColor">{{projet?.status}}</span></ion-item>
+       <ion-row style="border-bottom:1px solid #ebeef3;">
+         <ion-col> <h3>Titre  :</h3> </ion-col>
+        <ion-col>
+        
+            <h5 >{{projet?.Titre}}</h5>
 
-        <ion-item>
-          <h3><ion-icon name="calendar-number-outline"></ion-icon></h3> <h3 class="margin-left">Date-debut    :  </h3 > <span class="margin-left"> {{projet?.date_debut}}</span></ion-item>
-       
-        <ion-item>
-          <h3><ion-icon name="calendar-number-outline"></ion-icon></h3> <h3 class="margin-left">Date-fin   :  </h3><span class="margin-left"> {{projet?.date_fin}}</span> </ion-item>
+          
+        </ion-col>
+       </ion-row>
+       <ion-row style="border-bottom:1px solid #ebeef3;">
+        
+         <ion-col> <h3>Chef de projet  :</h3> </ion-col>
+        <ion-col>
+        
+            <h5 >{{projet?.chef}}</h5>
+
+          
+        </ion-col>
+       </ion-row>
+       <ion-row style="border-bottom:1px solid #ebeef3;">
+         <ion-col> 
+            <h3>status  :</h3>
+
+        </ion-col>
+        <ion-col> 
+        
+            <h5>
+              <ion-badge [style.background]="subbadgeColor" class='crud'>
+                <ion-badge class='crud-e' [style.background]="projet?.badgeColor">
+                  {{projet?.status}}
+                </ion-badge>
+              </ion-badge>
+
+            </h5>
+          
+        </ion-col>
+       </ion-row>
+
+
+       <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col>
+        
+            <h3><ion-icon name="calendar-number-outline"></ion-icon>Date-debut    :  </h3 > 
+          
+        </ion-col>
+        
+          <ion-col> 
+          
+           <h3> {{projet?.date_debut}}</h3>
+            
+          </ion-col>
+       </ion-row>
+
+       <ion-row style="border-bottom:1px solid #ebeef3;">
+        <ion-col>
+        
+            <h3><ion-icon name="calendar-number-outline"></ion-icon>Date-fin    :  </h3 >
+        </ion-col>
+        <ion-col>
+      
+           <h3> {{projet?.date_fin}}</h3>
+          
+          </ion-col>
+       </ion-row>
       </ion-col>
     
     </ion-row>
