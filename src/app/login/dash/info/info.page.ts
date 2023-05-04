@@ -19,7 +19,7 @@ export class InfoPage implements OnInit {
   user!:user[] 
   chef!:user
   subbadgeColor!:string;
-
+  status!:string
   constructor(private auth:Auth,private active_router:ActivatedRoute,private service:ProjetService,private alertcontroller:AlertController,private firestore:Firestore) { }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class InfoPage implements OnInit {
  
         this.subbadgeColor = '#FFC1C9'
         projet['badgeColor'] = '#ff0404';
-
+        this.status = 'dépassé le délai'
         
         
 
@@ -61,14 +61,14 @@ export class InfoPage implements OnInit {
         
         projet['badgeColor'] = '#FDA349';
         this.subbadgeColor = '#ffe0c0'
-     
+        this.status = 'en cours'
         
 
       } 
        else if(projet['status'] == 'Completed'){
         projet['badgeColor'] = '#3BAE74';         
         this.subbadgeColor = '#d5f3db'
-         
+        this.status = 'Complété'
 
       }
 

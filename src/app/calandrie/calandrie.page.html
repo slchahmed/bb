@@ -25,6 +25,63 @@
     </ion-col>
   </ion-row>
 </ion-grid>
-    
+<ion-grid>
+  <ion-row>
+    <ion-col offset-md="2">
+      <div class="overflow_container">
+        <ion-row>
+          <ion-col size="5">
+            <h2>Projets</h2>
+          </ion-col>
+          <ion-col size="7" >
+            <ion-searchbar placeholder="Recherche"  color="Medium" ngModel #value='ngModel' [debounce]="" (ionChange)="handleChange(value.value)"></ion-searchbar>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+        <ion-list>
+        
+            <ion-grid class="items">
+              
+                <ion-row class="titles">
+                  <ion-col style="margin-left: 30px;">Titre</ion-col>
+               
+                  <ion-col>Date-fin</ion-col>
+                  <ion-col>Action</ion-col>
+                 
+                </ion-row>
+              <div class="overflow">
+
+             
+              <ion-row class="rows_data" *ngFor="let projet of search_result"  style=" cursor:e-resize;">
+                <ion-item-sliding class="slider">
+                  <!-- <ion-item-options side="start"> -->
+                    <!-- <ion-item-option style="background-color: #2d38d3;" [routerLink]="[projet.id]"><ion-icon name="eye-outline"></ion-icon></ion-item-option> -->
+                  <!-- </ion-item-options> -->
+              
+                  <ion-item class="list_item" lines="none">
+                      <ion-col ><p class="hiden-text">{{projet.Titre}}</p></ion-col>
+                      
+                      <ion-col>{{projet.date_fin}}</ion-col>
+                      <ion-col>
+                        <ion-badge style="margin-left: 31%; font-weight: bold; font-size: large;" color="danger"  [routerLink]="[projet.id]"><ion-icon name="eye"></ion-icon></ion-badge>
+                      </ion-col>
+                      
+                  
+                  </ion-item>
+              
+                  
+                </ion-item-sliding>
+                
+              </ion-row>
+            </div>
+            </ion-grid>
+        </ion-list> 
+      </ion-col>
+      </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 </ion-content>

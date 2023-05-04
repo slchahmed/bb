@@ -9,9 +9,9 @@ const routes: Routes = [
     component: CalandriePage
   },
   {
-    path: ':date',
-    loadChildren: () => import('./date-list/date-list.module').then( m => m.DateListPageModule)
-  }
+    path: ':id',
+    loadChildren: () => import('../login/dash/info/info.module').then( m => m.InfoPageModule)
+  },
 ];
 
 @NgModule({

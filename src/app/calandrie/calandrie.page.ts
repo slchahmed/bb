@@ -11,6 +11,8 @@ export class CalandriePage implements OnInit {
   date_fin!:string
   date_fins!:string[]
   date_fins_temp:string[] = []
+  projets:projet[] = []
+  search_result!:projet[]
   constructor(private router:Router,private serviceprojects:ProjetService) { }
 
   ngOnInit() {
@@ -80,6 +82,7 @@ export class CalandriePage implements OnInit {
                   console.log(projet)
                   this.date_fin=this.formatdate(projet.date_fin).split('T')[0];
                    this.date_fins_temp.push(this.date_fin)
+                   this.projets.push(projet)
            
           }
       
@@ -89,6 +92,7 @@ export class CalandriePage implements OnInit {
           
        }
        this.date_fins = this.date_fins_temp
+       this.search_result = this.projets
        console.log(this.date_fins)
       //  this.projets=projets;
       //  this.search_result=this.projets.slice()
@@ -108,4 +112,9 @@ export class CalandriePage implements OnInit {
     const isoDate = new Date(`${year}-${month}-${day}`).toISOString();
     return isoDate
   }
+  handleChange(value:string){
+    const query = value.toLowerCase();
+    this.search_result = this.projets.filter(d => d.Titre.toLowerCase().indexOf(query) > -1);
+   
+     }
 }
